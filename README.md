@@ -1,0 +1,1 @@
+This is a work in progress project, that aims to create a simple clone of a clothing brand website. Please keep in mind that my aim here is to train back-end development, so front-end of this project is very simple and for testing purposes only.
