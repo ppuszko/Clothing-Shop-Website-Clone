@@ -1,0 +1,113 @@
+﻿@model ProductVM
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Add new Category</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <form method="post" enctype="multipart/form-data">
+            <div class="p-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <div class="card edit-card">
+                            <div class="card-body img-holder">
+                                <div class="thumbnail-carousel d-flex overflow-auto py-3">
+                                    @foreach (var element in Model.ProductImageList)
+                                    {
+                                        if (!element.IsMain)
+                                        {
+                                            <img src="@element.ImageUrl" class="img-thumbnail me-2" alt="Miniaturka" />
+                                        }
+                                    }
+                                </div>
+                                <div class="main-image position-relative">
+                                    <img id="main-image" src="@Model.ProductImageList.Find(u => u.IsMain == true).ImageUrl" class="img-fluid" alt="Main Product Image" />
+                                    <div class="arrow left position-absolute top-50 start-0 translate-middle-y d-none"> <i class="bi bi-arrow-left-short"></i> </div>
+                                    <div class="arrow right position-absolute top-50 end-0 transtale-middle-y d-none"> <i class="bi bi-arrow-right-short"></i> </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <div class="form-floating py-1 col-12">
+                            <input asp-for="Product.Name" class="form-control border shadow" />
+                            <label asp-for="Product.Name" class="ms-2"></label>
+                            <span asp-validation-for="Product.Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating py-1 col-12">
+                            <input asp-for="Product.Price" class="form-control border shadow" />
+                            <label asp-for="Product.Price" class="ms-2"></label>
+                            <span asp-validation-for="Product.Price" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating py-1 col-12 ">
+                            <input asp-for="Product.Size" class="form-control border shadow" />
+                            <label asp-for="Product.Size" class="ms-2"></label>
+                            <span asp-validation-for="Product.Size" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="option-toggle btn-group py-1 col-6 " role="group">
+                                <input asp-for="Product.ForMen" value="true" type="radio" class="btn-check " id="optionMen" autocomplete="off" />
+                                <label for="optionMen" class="btn btn-outline-primary align-content-center">Men</label>
+
+                                <input asp-for="Product.ForMen" value="false" type="radio" class="btn-check " id="optionWomen" autocomplete="off" checked />
+                                <label for="optionWomen" class="btn btn-outline-primary align-content-center">Women</label>
+                                <span asp-validation-for="Product.ForMen" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-floating py-1 col-6 ">
+                                <select asp-for="@Model.Product.TypeId" asp-items="@Model.TypesList" class="form-select border shadow">
+                                    <option disabled selected> Select Type </option>
+                                </select>
+                                <label asp-for="Product.TypeId" class="ms-2"></label>
+                                <span asp-validation-for="Product.TypeId" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating py-1 col-6 ">
+                                <select asp-for="@Model.Product.CategoryId" asp-items="@Model.CategoryList" class="form-select border shadow">
+                                    <option disabled selected> Select Category</option>
+                                </select>
+                                <label asp-for="Product.CategoryId" class="ms-2"></label>
+                                <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating py-1 col-6 ">
+                                <input asp-for="Product.PromoPrice" class="form-control border shadow" />
+                                <label asp-for="Product.PromoPrice" class="ms-2"></label>
+                                <span asp-validation-for="Product.PromoPrice" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-floating py-1 col-12">
+                            <input asp-for="Product.Description" class="form-control border shadow" />
+                            <label asp-for="Product.Description" class="ms-2"></label>
+                            <span asp-validation-for="Product.Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="bi bi-clipboard-plus-fill"></i> Submit
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-secondary w-100">
+                            <i class="bi bi-x-square-fill"></i> Cancel
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

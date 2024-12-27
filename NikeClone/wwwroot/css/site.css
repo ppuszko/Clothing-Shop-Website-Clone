@@ -1,0 +1,170 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60px;
+}
+
+.conatiner{
+    flex: 1;
+}
+
+.option-toggle .btn:first-of-type{
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 5px;
+    width: 100px;
+}
+
+.option-toggle .btn:last-of-type {
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 5px;
+    width: 100px;
+}
+
+.main-image{
+    position: relative;
+}
+
+
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: white;
+    background-color: rgba(0,0,0,0.5);
+    padding: 10px;
+    border: 2px solid red;
+    border-radius: 50%;
+    font-size: 10rem;
+    display: none;
+    z-index: 10;
+}
+
+.arrow.left{
+    left: 10px;
+}
+
+.arrow.right{
+    right: 10px;
+}
+
+.main-image:hover .arrow {
+    display: block;
+}
+
+.thumbnail-carousel{
+    align-self: start;
+    flex-direction: column;
+    gap: 10px;
+    width: 150px;
+    height: 100%;
+    opacity: 0.7;
+}
+
+thumbnail-carousel img{
+    height: 40px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.thumbnail-carousel img:hover{
+    opacity: 0.7;
+}
+
+.img-holder{
+    display:flex;
+}
+
+.card {
+    width: 400px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+
+    margin: 10px auto;
+}
+
+card-image{
+    width: 100%;
+    height: 350px;
+    margin: 0;
+    padding: 0;
+}
+
+.card-image img {
+    width: 100% !important;
+    height: 350px !important;
+    object-fit: cover !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+}
+
+.card-footer {
+    flex-direction: column;
+    height: 120px;
+    display: flex;
+
+}
+
+.details{
+    font-size: 26px;
+}
+.details-1{
+    font-size: 18px;
+    color: dimgrey;
+}
+
+.action-buttons{
+    visibility: hidden;
+}
+
+.baner{
+    height:500px;
+    width:100%;
+    background-image: url('../Images/banners/baner1.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar{
+    font-size: 18px;
+}
+
+/*
+.baner img{
+
+    width:100%;
+    height: 100%;
+    object-fit: cover;
+
+}*/

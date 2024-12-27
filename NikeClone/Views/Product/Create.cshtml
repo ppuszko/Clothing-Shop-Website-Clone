@@ -1,0 +1,157 @@
+﻿@model ProductVM
+
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Add new Category</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <form method="post" enctype="multipart/form-data">
+            <div class="p-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="form-floating py-1 col-12 col-lg-6 ">
+                        <input asp-for="Product.Name" class="form-control border shadow" />
+                        <label asp-for="Product.Name" class="ms-2"></label>
+                        <span asp-validation-for="Product.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating py-1 col-12 col-lg-6 ">
+                        <input asp-for="Product.Size" class="form-control border shadow" />
+                        <label asp-for="Product.Size" class="ms-2"></label>
+                        <span asp-validation-for="Product.Size" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-floating py-1 col-6 col-md-3 ">
+                        <input asp-for="Product.Price" class="form-control border shadow" />
+                        <label asp-for="Product.Price" class="ms-2"></label>
+                        <span asp-validation-for="Product.Price" class="text-danger"></span>
+                    </div>
+                    <div class="option-toggle btn-group py-1 col-6 col-md-3 " role="group">
+                        <input asp-for="Product.ForMen" value="true" type="radio" class="btn-check " id="optionMen" autocomplete="off" />
+                        <label for="optionMen" class="btn btn-outline-primary align-content-center">Men</label>
+
+                        <input asp-for="Product.ForMen" value="false" type="radio" class="btn-check " id="optionWomen" autocomplete="off" checked />
+                        <label for="optionWomen" class="btn btn-outline-primary align-content-center">Women</label>
+                        <span asp-validation-for="Product.ForMen" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating py-1 col-6 col-md-3 ">
+                        <select asp-for="@Model.Product.TypeId" asp-items="@Model.TypesList" class="form-select border shadow">
+                            <option disabled selected> Select Type </option>
+                        </select>
+                        <label asp-for="Product.TypeId" class="ms-2"></label>
+                        <span asp-validation-for="Product.TypeId" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating py-1 col-6 col-md-3 ">
+                        <select asp-for="@Model.Product.CategoryId" asp-items="@Model.CategoryList" class="form-select border shadow">
+                            <option disabled selected> Select Category</option>
+                        </select>
+                        <label asp-for="Product.CategoryId" class="ms-2"></label>
+                        <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-floating py-1 col-12">
+                    <input asp-for="Product.Description" class="form-control border shadow" />
+                    <label asp-for="Product.Description" class="ms-2"></label>
+                    <span asp-validation-for="Product.Description" class="text-danger"></span>
+                </div>
+
+                <div class="row">
+                    <div class="form-floating py-1 col-3">
+                        <input asp-for="ImageList" type="file" id="imageUpload" multiple class="form-control border shadow" />
+                        <label asp-for="ImageList" class="ms-2">Upload Images</label>
+                    </div>
+                </div>
+
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="bi bi-clipboard-plus-fill"></i> Submit
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-secondary w-100">
+                            <i class="bi bi-x-square-fill"></i> Cancel
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+       @*  @section Scripts {
+            <script>
+                document.getElementById('imageUpload').addEventListener('change', async function(event) {
+                    const files = event.target.files;
+                    const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+                    imagePreviewContainer.innerHTML = '';
+
+                    for (const file of files) {
+
+                        if (!file.type.startsWith('image/')) {
+                            console.warn(`Skipped non-image file: ${file.name}`);
+                            continue;
+                        }
+
+                        const imageUrl = URL.createObjectURL(file);
+
+                        const mainImageId = `mainImage-${file.name}`;
+                        const secondaryImageId = `secondaryImage-${file.name}`;
+
+                        const imageContainer = document.createElement('div');
+                        imageContainer.classList.add("col-3", "image-item", "mb-3");
+                        imageContainer.innerHTML = `
+                            <div>
+                                <div>
+                                    <img src="${imageUrl}" alt="Image" width="100" class="img-fluid"/>
+                                </div>
+                                <div class="option-toggle btn-group btn-group-toggle d-flex justify-content-center py-1 col-3" data-toggle-buttons role="group">
+                                    <input type="radio" id="${mainImageId}" name="mainImage" value="${file.name}" onchange="setMainImage('${file.name}', '${secondaryImageId}')" class="btn-check" autocomplete="off" />
+                                    <label for="${mainImageId}" class="btn btn-outline-primary align-content-center">Main Image</label>
+                                    <input type="radio" id="${secondaryImageId}" name="secondaryImage" value="${file.name}" onchange="setSecondaryImage('${file.name}', '${mainImageId}')" class="btn-check" autocomplete="off" />
+                                    <label for="${secondaryImageId}" class="btn btn-outline-primary align-content-center">Secondary Image</label>
+                                </div>
+                            </div>
+                        `;
+                        imagePreviewContainer.appendChild(imageContainer);
+                    }
+                });
+
+                function setMainImage(fileName, secondaryImageId) {
+                    // Set the main image URL
+                    document.getElementById('mainImageUrl').value = fileName;
+
+                    // Uncheck the secondary image if selected
+                    const secondaryRadio = document.getElementById(secondaryImageId);
+                    if (secondaryRadio) {
+                        secondaryRadio.checked = false;
+                        document.getElementById('secondaryImageUrl').value = ''; // Reset secondary image URL
+                    }
+
+                }
+
+                function setSecondaryImage(fileName, mainImageId) {
+                    // Set the secondary image URL
+                    document.getElementById('secondaryImageUrl').value = fileName;
+
+                    // Uncheck the main image if selected
+                    const mainRadio = document.getElementById(mainImageId);
+                    if (mainRadio) {
+                        mainRadio.checked = false;
+                        document.getElementById('mainImageUrl').value = ''; // Reset main image URL
+                    }
+
+
+                }
+
+              
+            </script>
+        } *@
+
+    </div>
+</div>

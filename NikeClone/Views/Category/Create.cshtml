@@ -1,0 +1,57 @@
+﻿@model CategoryVM
+
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Add new Category</h2>
+            </div>
+        </div>
+    </div> 
+    <div class="card-body border p-4">
+        <form method="post" class="row">
+            <div class="p-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-floating py-1 col-12">
+                    <input asp-for="Category.Name" class="form-control border shadow" />
+                    <label asp-for="Category.Name" class="ms-2"></label>
+                    <span asp-validation-for="Category.Name" class="text-danger"></span>
+                </div>
+
+                
+
+                
+
+               @*  <div class="form-floating py-1 col-12">
+                    <select asp-for="@Model.Category.TypeId" asp-items="@Model.TypeList" class="form-select border shadow">
+                        <option disabled selected> Select Type </option>
+                    </select>
+                    <label asp-for="Category.TypeId" class="ms-2"></label>
+                    <span asp-validation-for="Category.TypeId" class="text-danger"></span>
+                </div> *@
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="bi bi-clipboard-plus-fill"></i> Submit
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-secondary w-100">
+                            <i class="bi bi-x-square-fill"></i> Cancel
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+
+
+
+
+
+
+
+</div>

@@ -1,0 +1,53 @@
+﻿@using NikeClone.Domain.Entities
+@model IEnumerable<Types>
+
+
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Types list:</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <div class="row pb-3">
+            <div class="col-6 offset-6 text-end">
+                <a asp-controller="Type" asp-action="Create" class="btn btn-success">
+                    <i class="bi bi-clipboard-plus-fill"></i> Add new type
+                </a>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th style="text-align:center">Name: </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td class="container w-75" style="text-align:center">
+                            @obj.Name
+                        </td>
+                        <td class="container w-25">
+                            <div class="col-6 offset-6 text-end">
+                                <a asp-controller="Type" asp-action="Edit" asp-route-Id="@obj.Id" class="btn btn-success">
+                                    <i class="bi bi-clipboard-plus-fill"></i> Edit
+                                </a>
+                          
+                                <a asp-controller="Type" asp-action="Delete" asp-route-Id="@obj.Id" class="btn btn-danger">
+                                    <i class="bi bi-clipboard-plus-fill"></i> Delete
+                                </a>
+                            </div>
+                        </td>
+                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

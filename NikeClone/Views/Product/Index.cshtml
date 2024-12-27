@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ProductVM>
+
+
+<div class="row">
+    @foreach (var prod in Model)
+    {
+
+        <div class="container mt-3 col-6 col-md-4">
+            <div class="card">
+                <div class="card-body  card-image">
+                    <img src="@prod.ProductImageList.Find(u => u.IsMain == true).ImageUrl" class="img-thumbnail me-2" alt="Miniaturka" />
+                </div>
+                <div class="card-footer">
+                    <h2 class="details">@prod.Product.Name</h2>
+                    <h2 class="details">@prod.Product.Price</h2>
+                    @if (prod.Product.ForMen == true)
+                    {
+                        <h1 class="details-1"> Men </h1>
+                    }
+                    else
+                    {
+                        <h1 class="details-1">
+                            Women
+                        </h1>
+                    }
+                    <div class="col-6 offset-6 text-end action-buttons">
+                        <a asp-controller="Product" asp-action="Edit" asp-route-Id="@prod.Product.Id" class="btn btn-success">
+                            <i class="bi bi-clipboard-plus-fill"></i> Edit
+                        </a>
+
+                        <a asp-controller="Product" asp-action="Delete" asp-route-Id="@prod.Product.Id" class="btn btn-danger">
+                            <i class="bi bi-clipboard-plus-fill"></i> Delete
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>   
+    }
+</div>
